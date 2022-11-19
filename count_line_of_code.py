@@ -11,7 +11,7 @@ def init():
         fileMap[ext] = []
 
 
-def getFile(basePath):
+def get_file(basePath):
     global fileMap
     for dirpath, dirnames, filenames in os.walk(basePath):
         for filename in filenames:
@@ -20,8 +20,9 @@ def getFile(basePath):
                 fileMap[ext].append(os.path.join(dirpath, filename))
 
 
-def countLine(filename):
+def count_line(filename):
     count = 0
+    # if not open as mode 'rb', encoding='UTF-8' param is necessary.
     for fileLine in open(filename, 'rb').readlines():
         if not fileLine.isspace():
             count += 1
@@ -33,7 +34,7 @@ if __name__ == '__main__':
     basePath = defaultBasePath
     if len(sys.argv) == 2:
         basePath = sys.argv[1]
-    getFile(basePath)
+    get_file(basePath)
 
     totalCount = 0
     print("type".ljust(15), "count".rjust(15), sep="")
@@ -43,7 +44,7 @@ if __name__ == '__main__':
             continue
         count = 0
         for file in flist:
-            count += countLine(file)
+            count += count_line(file)
         print(ext.ljust(15), format(count, ",").rjust(15), sep="")
         totalCount += count
     print("=" * 30, sep="")

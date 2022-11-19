@@ -12,3 +12,5 @@ function gitstat_myself() {
 function gitstat_commit_sort() {
     git log --pretty='%aN' | sort | uniq -c | sort -k1 -n -r
 }
+
+# todo: test_many
